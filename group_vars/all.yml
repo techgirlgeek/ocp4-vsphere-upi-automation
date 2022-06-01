@@ -54,7 +54,7 @@ network_modifications:
   serviceNetwork:
   - cidr: 100.68.0.0/16
   machineNetwork:
-  - cidr: 192.168.29.0/24
+  - cidr: 172.24.20.96/27
 proxy:
   enabled: false
   http_proxy: http://helper.ocp4.example.com:3129
