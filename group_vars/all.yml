@@ -11,7 +11,7 @@ config:
   pull_secret: "{{ lookup('file', '~/pullsecret') }}"
 vcenter:
   ip: 172.23.116.120
-  datastore: gnprod.dsc.ccpa.01	
+  datastore: gnprod.dsc.ccp01.vmfs.04
   network: NP_OpenShift_POC_1096
   service_account_username: placeholder_lastpass
   service_account_password: placeholder_lastpass
@@ -27,19 +27,19 @@ download:
   dependencies_url: https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/latest
   govc: https://github.com/vmware/govmomi/releases/download/v0.27.4
 bootstrap_vms:
-  - { name: "bootstrap01", macaddr: "", ipaddr: "172.24.20.104", cpu: 4, ram: 16384}
+  - { name: "bootstrap01", macaddr: "00:50:56:ba:a9:21", ipaddr: "172.24.20.104", cpu: 8, ram: 16384}
 master_vms:
-  - { name: "master01", macaddr: "", ipaddr: "172.24.20.105", cpu: 4, ram: 16384}
-  - { name: "master02", macaddr: "", ipaddr: "172.24.20.108", cpu: 4, ram: 16384}
-  - { name: "master03", macaddr: "", ipaddr: "172.24.20.110", cpu: 4, ram: 16384}
+  - { name: "master01", macaddr: "00:50:56:ba:a7:89", ipaddr: "172.24.20.105", cpu: 8, ram: 16384}
+  - { name: "master02", macaddr: "00:50:56:ba:03:2d", ipaddr: "172.24.20.108", cpu: 8, ram: 16384}
+  - { name: "master03", macaddr: "00:50:56:ba:46:69", ipaddr: "172.24.20.110", cpu: 8, ram: 16384}
 worker_vms:
-  - { name: "worker01", macaddr: "", ipaddr: "172.24.20.111", cpu: 4, ram: 16384}
-  - { name: "worker02", macaddr: "", ipaddr: "172.24.20.112", cpu: 4, ram: 16384}
-  - { name: "worker03", macaddr: "", ipaddr: "172.24.20.113", cpu: 4, ram: 16384}
+  - { name: "worker01", macaddr: "", ipaddr: "172.24.20.111", cpu: 8, ram: 16384}
+  - { name: "worker02", macaddr: "", ipaddr: "172.24.20.112", cpu: 8, ram: 16384}
+  - { name: "worker03", macaddr: "", ipaddr: "172.24.20.113", cpu: 8, ram: 16384}
 infra_vms:
-  - { name: "infra01", macaddr:: "", ipaddr: "172.24.20.114", cpu: 4, ram: 16384}
-  - { name: "infra02", macaddr:: "", ipaddr: "172.24.20.115", cpu: 4, ram: 16384}
-  - { name: "infra03", macaddr:: "", ipaddr: "172.24.20.116", cpu: 4, ram: 16384}
+  - { name: "infra01", macaddr:: "00:50:56:ba:4c:aa", ipaddr: "172.24.20.114", cpu: 8, ram: 64000}
+  - { name: "infra02", macaddr:: "00:50:56:ba:9a:46", ipaddr: "172.24.20.115", cpu: 8, ram: 64000}
+  - { name: "infra03", macaddr:: "00:50:56:ba:07:5d", ipaddr: "172.24.20.116", cpu: 8, ram: 64000}
 
 static_ip:
   gateway: 192.168.86.1
