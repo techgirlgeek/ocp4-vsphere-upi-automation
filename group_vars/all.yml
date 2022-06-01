@@ -1,23 +1,23 @@
-helper_vm_ip: 192.168.86.180
+helper_vm_ip: 172.24.20.122
 bootstrap_ignition_url: "http://{{helper_vm_ip}}:8080/ignition/bootstrap.ign"
 config:
   provider: vsphere
-  base_domain: example.com
-  cluster_name: ocp4
+  base_domain: ocp4-01.np.costco.com
+  cluster_name: ecp-wdc-sbx01
   fips: false
   #networkType: OVNKubernetes
   #isolationMode: Multitenant
   installer_ssh_key: "{{ lookup('file', '~/.ssh/ocp4.pub') }}"
   pull_secret: "{{ lookup('file', '~/pullsecret') }}"
 vcenter:
-  ip: 192.168.86.100
-  datastore: datastore1
-  network: VM Network
-  service_account_username: administrator@vsphere.local
-  service_account_password: something
+  ip: 172.23.116.120
+  datastore: gnprod.dsc.ccpa.01	
+  network: NP_OpenShift_POC_1096
+  service_account_username: placeholder_lastpass
+  service_account_password: placeholder_lastpass
   admin_username: administrator@vsphere.local
   admin_password: something
-  datacenter: dc
+  datacenter: np.dc.wdc.general
   folder_absolute_path:
   vm_power_state: poweredon
   template_name: rhcos-vmware
@@ -27,15 +27,20 @@ download:
   dependencies_url: https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/latest
   govc: https://github.com/vmware/govmomi/releases/download/v0.27.4
 bootstrap_vms:
-  - { name: "bootstrap", macaddr: "00:50:56:a8:aa:a1", ipaddr: "192.168.86.181", cpu: 4, ram: 16384}
+  - { name: "bootstrap01", macaddr: "", ipaddr: "172.24.20.104", cpu: 4, ram: 16384}
 master_vms:
-  - { name: "master0", macaddr: "00:50:56:a8:aa:a2", ipaddr: "192.168.86.182", cpu: 4, ram: 16384}
-  - { name: "master1", macaddr: "00:50:56:a8:aa:a3", ipaddr: "192.168.86.183", cpu: 4, ram: 16384}
-  - { name: "master2", macaddr: "00:50:56:a8:aa:a4", ipaddr: "192.168.86.184", cpu: 4, ram: 16384}
+  - { name: "master01", macaddr: "", ipaddr: "172.24.20.105", cpu: 4, ram: 16384}
+  - { name: "master02", macaddr: "", ipaddr: "172.24.20.108", cpu: 4, ram: 16384}
+  - { name: "master03", macaddr: "", ipaddr: "172.24.20.110", cpu: 4, ram: 16384}
 worker_vms:
-  - { name: "worker0", macaddr: "00:50:56:a8:aa:a5", ipaddr: "192.168.86.185", cpu: 4, ram: 16384}
-  - { name: "worker1", macaddr: "00:50:56:a8:aa:a6", ipaddr: "192.168.86.186", cpu: 4, ram: 16384}
-  - { name: "worker2", macaddr: "00:50:56:a8:aa:a7", ipaddr: "192.168.86.187", cpu: 4, ram: 16384}
+  - { name: "worker01", macaddr: "", ipaddr: "172.24.20.111", cpu: 4, ram: 16384}
+  - { name: "worker02", macaddr: "", ipaddr: "172.24.20.112", cpu: 4, ram: 16384}
+  - { name: "worker03", macaddr: "", ipaddr: "172.24.20.113", cpu: 4, ram: 16384}
+infra_vms:
+  - { name: "infra01", macaddr:: "", ipaddr: "172.24.20.114", cpu: 4, ram: 16384}
+  - { name: "infra02", macaddr:: "", ipaddr: "172.24.20.115", cpu: 4, ram: 16384}
+  - { name: "infra03", macaddr:: "", ipaddr: "172.24.20.116", cpu: 4, ram: 16384}
+
 static_ip:
   gateway: 192.168.86.1
   netmask: 255.255.255.0
@@ -47,7 +52,7 @@ network_modifications:
   - cidr: 10.128.0.0/14
     hostPrefix: 23
   serviceNetwork:
-  - cidr: 172.30.0.0/16
+  - cidr: 100.68.0.0/16
   machineNetwork:
   - cidr: 192.168.29.0/24
 proxy:
@@ -63,7 +68,7 @@ registry:
   enabled: false
   product_repo: openshift-release-dev
   product_release_name: ocp-release
-  product_release_version: 4.4.0-x86_64
+  product_release_version: 4.9.10-x86_64
   username: ansible
   password: ansible
   email: user@awesome.org
