@@ -2,7 +2,7 @@ helper_vm_ip: 172.24.20.122
 bootstrap_ignition_url: "http://{{helper_vm_ip}}:8080/ignition/bootstrap.ign"
 config:
   provider: vsphere
-  base_domain: ocp4-01.np.costco.com
+  base_domain: ocp4.np.costco.com
   cluster_name: ecp-wdc-sbx01
   fips: false
   #networkType: OVNKubernetes
@@ -20,7 +20,7 @@ vcenter:
   datacenter: np.dc.wdc.general
   folder_absolute_path:
   vm_power_state: poweredon
-  template_name: rhcos-vmware
+  template_name: template-rhcos
   hw_version: 15
 download:
   clients_url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest
